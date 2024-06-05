@@ -166,7 +166,7 @@ EstadoExpresion reconocerDeclaracion(string &cadena){
 }
 
 bool esVariableReservada(string token){
-	if(token == "int" || token == "float" || token == "char" || token == "string" || token == "bool" 
+	if(token == "entero" || token == "real" || token == "caracter" || token == "cadena" || token == "bool" 
 		|| token == "double" || token == "long" || token == "short"){
 		return true;	
 	}else{
