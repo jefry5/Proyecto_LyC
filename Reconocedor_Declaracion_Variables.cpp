@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 enum class EstadoExpresion {Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,QF};
@@ -15,9 +16,27 @@ int j = 0; // índice dentro de la cadena fuente
 
 int main(){
 	string cadenaFuente;
-    cout << "Ingrese la cadenaFuente: ";
-    getline(cin, cadenaFuente);
+    /*cout << "Ingrese la cadenaFuente: ";
+    getline(cin, cadenaFuente);*/
     
+	ifstream archivo("codigoDeclaracion.txt"); 
+
+    if (archivo.is_open()) { 
+        string linea;
+        while (getline(archivo, linea)) { 
+	        for (char& c : linea) {
+	            if (c == '\t') {
+	                c = ' ';
+	            }
+	        }
+            cadenaFuente+= linea + " "; 
+        }
+        archivo.close(); 
+    } else {
+        cerr << "Error al abrir el codigo fuente." << endl;
+        return 0;
+    }
+
 	EstadoExpresion declaracion_variable = reconocerDeclaracion(cadenaFuente);
 	if(declaracion_variable == EstadoExpresion::QF){
 		cout<<"\nSin errores";

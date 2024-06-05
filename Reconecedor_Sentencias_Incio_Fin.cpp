@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cctype>
+#include <fstream>
 
 using namespace std;
 
@@ -22,9 +23,27 @@ int j = 0; // índice dentro de la cadena fuente
 int main(){
 	string cadenaFuente;
     Nodo *pila = NULL;
-    cout << "Ingrese la cadenaFuente: ";
-    getline(cin, cadenaFuente);
-    
+    /*cout << "Ingrese la cadenaFuente: ";
+    getline(cin, cadenaFuente);*/
+
+    ifstream archivo("codigoFuente.txt"); 
+
+    if (archivo.is_open()) { 
+        string linea;
+        while (getline(archivo, linea)) { 
+	        for (char& c : linea) {
+	            if (c == '\t') {
+	                c = ' ';
+	            }
+	        }
+            cadenaFuente+= linea + " "; 
+        }
+        archivo.close(); 
+    } else {
+        cerr << "Error al abrir el codigo fuente." << endl;
+        return 1;
+    }
+     
     EstadoPila reconocerdor_Flujo = reconocerFlujo(cadenaFuente,pila);
     if(reconocerdor_Flujo == EstadoPila::QF){
         cout<<"\nSin errores";

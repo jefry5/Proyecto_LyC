@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 enum class EstadoExpresion {Q0,Q1,Q2,Q3,QF};
@@ -34,7 +35,6 @@ int main(){
 	}else{
 		cout<<"\nError al reconocer la expresion aritmetica";
 	}
-
 	return 0;
 }
 
